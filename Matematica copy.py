@@ -19,9 +19,9 @@ root.geometry('%dx%d+%d+%d'%(compR,altR,inf1,inf2))
 class ExeFrame(Frame):
     def __init__(self,p):
         super().__init__()
-        self['height'] - 360
-        self['width'] = 200
-        self['bd'] = 3
+        self['bd'] = 2
+        self['padx'] = 2
+        self['pady'] = 2
         self['relief'] = SOLID
 
 #Variáveis
@@ -67,28 +67,33 @@ def linkbotao():
     nume = SPb_v.get()
     opc = variavel.get()
     for c in range(nume):
-        Lab1 = Label(FrameExer,
-                     text='ok',font='Arial 16',
+        Lab0 = Label(FrameExer,
                      height=2,
                      width=8,
-                     bd=2,                                          
+                     bd=1,                                          
                      relief=SOLID)
+        Lab1 = Label(FrameExer,
+                     text='ok',font='Arial 16')
         Resp = Entry(FrameExer)
-
+        Lab0.grid()
         if c <= 2:
-            Lab1.grid(row = 0, column = c+1)
-            Resp.grid(row = 1, column = c+1)
+            Lab0.grid(row = 0, column = c+1)
+            Lab1.grid()
+            Resp.grid()            
         elif 2 < c <= 5:
-            Lab1.grid(row = 2, column = c-2)
-            Resp.grid(row = 3, column = c-2)
+            Lab0.grid(row = 1, column = c-2)
+            Lab1.grid()
+            Resp.grid()
         elif 5 < c <= 8:
-            Lab1.grid(row = 4, column = c - 5)
-            Resp.grid(row = 5, column = c - 5)
+            Lab0.grid(row = 2, column = c - 5)
+            Lab1.grid()
+            Resp.grid()
         elif 8 < c <= 11:
-            Lab1.grid(row = 6, column = c - 8)
-            Resp.grid(row = 7, column = c - 8)
-        Lab1.grid_configure(padx=4, pady=3)
-        Resp.grid_configure(padx=4, pady=3)
+            Lab0.grid(row = 3, column = c - 8)
+            Lab1.grid()
+            Resp.grid()
+        Lab1.grid_configure(padx=4, pady=3, in_=Lab0)
+        Resp.grid_configure(padx=4, pady=3, in_=Lab0)
             
 #Layout e funcionalidades
 
