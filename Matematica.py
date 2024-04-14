@@ -7,7 +7,7 @@ comp = root.winfo_screenwidth()
 alt = root.winfo_screenheight()
 #Dimensões da aplicação
 compR = 750
-altR = 450
+altR = 500
 #Posicionamento da aplicação na tela
 inf1 = comp/2 - compR/2 - 200
 inf2 = alt/2 - altR/2 - 100
@@ -33,20 +33,24 @@ SPb_v.set(value=1)
 FrameExer = ExeFrame(root)
 FrameRespet = Frame(root)
 #Comandos
-respostas = ()
+Equacoes = []
+Resposta1 = []
+Resposta2 = []
 
-class Exercícios():
+class Exercicios():
             
     def soma():
         a = randint(1,99)
         b = randint(1,99)
         res = a+b
-        res2 = a
+        Equacoes.append([a,'+',b])
+        Resposta1.append([res])
     def mult():
         a = randint(1,9)
         b = randint(1,9)
         res = a*b
-        res2 = a
+        Equacoes.append([a,'x',b])
+        Resposta1.append([res])
     def sub():
         while True:
             a = randint(1,99)
@@ -54,7 +58,8 @@ class Exercícios():
             res = a-b
             if res > 0:
                 break
-        res2 = a
+        Equacoes.append([a,'-',b])
+        Resposta1.append([res])
     def div():
         while True:
             a = randint(1,99)
@@ -62,43 +67,55 @@ class Exercícios():
             res = a/b
             if res in range(1,99):
                 break
-        res2 = a
+        Equacoes.append([a,'/',b])
+        Resposta1.append([res])
 
 class botoes():
     def linkbotao():
         nume = SPb_v.get()
         opc = variavel.get()
+        BExe["state"] = "disabled"
+        
+        def responder():
+            print(Resposta1)
+
+        for c in range(nume):
+            Exercicios.soma()
         for c in range(nume):
             Lab1 = Label(FrameExer,
-                        text='ok',font='Arial 16',
-                        height=2,
-                        width=8,
-                        bd=2,                                          
-                        relief=SOLID)
-            Resp = Entry(FrameExer)
-
+                            text='ok', font='Arial 16',
+                            height=2,
+                            width=8,
+                            bd=2,                                          
+                            relief=SOLID)
+            Respe = StringVar()
+            Resp = Text(FrameExer, width=10, height=1, font='arial 14')
             
+            globals
+
             if c <= 2:
                 Lab1.grid(row = 0, column = c+1)
+                Lab1.config(text=Equacoes[c])
                 Resp.grid(row = 1, column = c+1)
             elif 2 < c <= 5:
                 Lab1.grid(row = 2, column = c-2)
+                Lab1.config(text=Equacoes[c])
                 Resp.grid(row = 3, column = c-2)
             elif 5 < c <= 8:
                 Lab1.grid(row = 4, column = c - 5)
+                Lab1.config(text=Equacoes[c])
                 Resp.grid(row = 5, column = c - 5)
             elif 8 < c <= 11:
                 Lab1.grid(row = 6, column = c - 8)
+                Lab1.config(text=Equacoes[c])
                 Resp.grid(row = 7, column = c - 8)
             Lab1.grid_configure(padx=4, pady=3)
             Resp.grid_configure(padx=4, pady=3)
-            BRes = Button(FrameRespet,text='Responder').grid(row=0,column=0)
+            BRes = Button(FrameRespet,text='Responder', command=responder).grid(row=0,column=0)
             BReset = Button(FrameRespet, text='Reset').grid(row=0, column=1)
-    def responder():
-        a = 2
-    def reset():
-        a = 3
-            
+
+        def reset():
+            pass        
 #Layout e funcionalidades
 
 RBsom = Radiobutton(FrameOpc, text='Soma',font= '14',variable= variavel, value='soma')
@@ -111,7 +128,8 @@ RBdiv = Radiobutton(FrameOpc, text='Divisão',font= '14',variable= variavel, val
 RBdiv.grid(row= 0,column= 3)
 RBsom.select()
 
-BExe = Button(FrameExec, text='Executar', relief=SOLID, command=botoes.linkbotao).grid(row=1,column=0)
+BExe = Button(FrameExec, text='Executar', relief=RAISED, command=botoes.linkbotao)
+BExe.grid(row=1,column=0)
 
 SPb = Spinbox(FrameExec, from_=1, to=12, textvariable=SPb_v)
 SPb.grid(row=1, column=1)

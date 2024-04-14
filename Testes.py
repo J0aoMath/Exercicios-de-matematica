@@ -1,17 +1,19 @@
 from tkinter import *
+from tkinter import ttk
 from random import randint
 root = Tk()
 comp = root.winfo_screenwidth()
 alt = root.winfo_screenheight()
 #Dimensões da aplicação
 compR = 750
-altR = 450
+altR = 500
 #Posicionamento da aplicação na tela
 inf1 = comp/2 - compR/2 - 200
 inf2 = alt/2 - altR/2 - 100
 #Geometry
 root.geometry('%dx%d+%d+%d'%(compR,altR,inf1,inf2))
 #
+
 class ExeFrame(Frame):
     def __init__(self,p):
         super().__init__()
@@ -44,16 +46,25 @@ class botoes():
         nume = SPb_v.get()
         opc = variavel.get()
         BExe["state"] = "disabled"
+        
+        def responder():
+            Resposta2.append([Resp.get()])
+            
+            print(Resposta2)
+
         for c in range(nume):
             soma()
         for c in range(nume):
             Lab1 = Label(FrameExer,
-                        text='ok', font='Arial 16',
-                        height=2,
-                        width=8,
-                        bd=2,                                          
-                        relief=SOLID)
-            Resp = Entry(FrameExer)
+                            text='ok', font='Arial 16',
+                            height=2,
+                            width=8,
+                            bd=2,                                          
+                            relief=SOLID)
+            Respe = StringVar()
+            Resp = Text(FrameExer, width=10, height=1, font='arial 14')
+            
+            globals
 
             if c <= 2:
                 Lab1.grid(row = 0, column = c+1)
@@ -73,12 +84,11 @@ class botoes():
                 Resp.grid(row = 7, column = c - 8)
             Lab1.grid_configure(padx=4, pady=3)
             Resp.grid_configure(padx=4, pady=3)
-            BRes = Button(FrameRespet,text='Responder').grid(row=0,column=0)
+            BRes = Button(FrameRespet,text='Responder', command=responder).grid(row=0,column=0)
             BReset = Button(FrameRespet, text='Reset').grid(row=0, column=1)
-    def responder():
-        pass
-    def reset():
-        pass
+
+        def reset():
+            pass
             
 #Layout e funcionalidades
 
