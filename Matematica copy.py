@@ -74,7 +74,7 @@ def linkbotao():
                      relief=SOLID)
         Lab1 = Label(FrameExer,
                      text='ok',font='Arial 16')
-        Resp = Entry(FrameExer)
+        Resp = Entry(FrameExer, )
         Lab0.grid()
         if c <= 2:
             Lab0.grid(row = 0, column = c+1)
