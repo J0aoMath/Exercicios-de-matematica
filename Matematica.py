@@ -7,7 +7,7 @@ comp = root.winfo_screenwidth()
 alt = root.winfo_screenheight()
 #Dimensões da aplicação
 compR = 750
-altR = 500
+altR = 525
 #Posicionamento da aplicação na tela
 inf1 = comp/2 - compR/2 - 200
 inf2 = alt/2 - altR/2 - 100
@@ -19,7 +19,6 @@ root.geometry('%dx%d+%d+%d'%(compR,altR,inf1,inf2))
 class ExeFrame(Frame):
     def __init__(self,p):
         super().__init__()
-        self['bd'] = 2
         self['padx'] = 2
         self['pady'] = 2
         self['relief'] = SOLID
@@ -32,10 +31,14 @@ SPb_v = IntVar()
 SPb_v.set(value=1)
 FrameExer = ExeFrame(root)
 FrameRespet = Frame(root)
+
 #Comandos
 Equacoes = []
-Resposta1 = []
-Resposta2 = []
+Respostas = []
+
+
+#Funcoes
+
 
 class Exercicios():
             
@@ -44,13 +47,13 @@ class Exercicios():
         b = randint(1,99)
         res = a+b
         Equacoes.append([a,'+',b])
-        Resposta1.append([res])
+        Respostas.append(res)
     def mult():
         a = randint(1,9)
         b = randint(1,9)
         res = a*b
         Equacoes.append([a,'x',b])
-        Resposta1.append([res])
+        Respostas.append(res)
     def sub():
         while True:
             a = randint(1,99)
@@ -59,7 +62,7 @@ class Exercicios():
             if res > 0:
                 break
         Equacoes.append([a,'-',b])
-        Resposta1.append([res])
+        Respostas.append(res)
     def div():
         while True:
             a = randint(1,99)
@@ -68,19 +71,111 @@ class Exercicios():
             if res in range(1,99):
                 break
         Equacoes.append([a,'/',b])
-        Resposta1.append([res])
+        Respostas.append(int(res))
 
 class botoes():
     def linkbotao():
+        #Entries
+        ent1 = IntVar()
+        entr1 = Entry(FrameExer, textvariable=ent1)
+        ent2 = IntVar()
+        entr2 = Entry(FrameExer, textvariable=ent2)
+        ent3 = IntVar()
+        entr3 = Entry(FrameExer, textvariable=ent3)
+        ent4 = IntVar()
+        entr4 = Entry(FrameExer, textvariable=ent4)
+        ent5 = IntVar()
+        entr5 = Entry(FrameExer, textvariable=ent5)
+        ent6 = IntVar()
+        entr6 = Entry(FrameExer, textvariable=ent6)
+        ent7 = IntVar()
+        entr7 = Entry(FrameExer, textvariable=ent7)
+        ent8 = IntVar()
+        entr8 = Entry(FrameExer, textvariable=ent8)
+        ent9 = IntVar()
+        entr9= Entry(FrameExer, textvariable=ent9)
+        ent10 = IntVar()
+        entr10 = Entry(FrameExer, textvariable=ent10)
+        ent11 = IntVar()
+        entr11 = Entry(FrameExer, textvariable=ent11)
+        ent12 = IntVar()
+        entr12 = Entry(FrameExer, textvariable=ent12)
         nume = SPb_v.get()
         opc = variavel.get()
         BExe["state"] = "disabled"
+        Entries = []
+        def gridentry():
+            nume1= int(SPb_v.get())
+            if nume1 >= 1: entr1.grid(row = 1, column = 1,padx=4, pady=3)
+            if nume1 >= 2: entr2.grid(row = 1, column = 2,padx=4, pady=3)
+            if nume1 >= 3: entr3.grid(row = 1, column = 3,padx=4, pady=3)
+            if nume1 >= 4: entr4.grid(row = 4, column = 1,padx=4, pady=3)
+            if nume1 >= 5: entr5.grid(row = 4, column = 2,padx=4, pady=3)
+            if nume1 >= 6: entr6.grid(row = 4, column = 3,padx=4, pady=3)
+            if nume1 >= 7: entr7.grid(row = 7, column = 1,padx=4, pady=3)
+            if nume1 >= 8: entr8.grid(row = 7, column = 2,padx=4, pady=3)
+            if nume1 >= 9: entr9.grid(row = 7, column = 3,padx=4, pady=3)
+            if nume1 >= 10: entr10.grid(row = 10, column = 1,padx=4, pady=3)
+            if nume1 >= 11: entr11.grid(row = 10, column = 2,padx=4, pady=3)
+            if nume1 >= 12: entr12.grid(row = 10, column = 3,padx=4, pady=3)
         
-        def responder():
-            print(Resposta1)
 
-        for c in range(nume):
-            Exercicios.soma()
+        def resetbutton():
+            for widget in FrameExer.winfo_children():
+                widget.destroy()
+            for widget in FrameRespet.winfo_children():
+                widget.destroy()
+            Respostas.clear()
+            Entries.clear()
+            Equacoes.clear()
+            BExe['state'] = 'normal'
+
+        def responder():
+            Entries = [ent1.get(),ent2.get(),ent3.get(),ent4.get(),ent5.get(),ent6.get(),
+                       ent7.get(),ent8.get(),ent9.get(),ent10.get(),ent11.get(),ent12.get()]
+            
+            total = 0
+            for c in range(nume):
+                if c <= 2:
+                    if Entries[c] == Respostas[c]:
+                        Label(FrameExer,text='Correto!',bg='green').grid(row=2,column=c+1)
+                        total += 1
+                    else:
+                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='red').grid(row=2,column=c+1)
+                elif c <= 5:
+                    if Entries[c] == Respostas[c]:
+                        Label(FrameExer,text='Correto!',bg='green').grid(row=5,column=c-2)
+                        total += 1
+                    else:
+                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='red').grid(row=5,column=c-2)
+                elif c <= 8:
+                    if Entries[c] == Respostas[c]:
+                        Label(FrameExer,text='Correto!',bg='green').grid(row=8,column=c-5)
+                        total += 1
+                    else:
+                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='red').grid(row=8,column=c-5)
+                elif c <= 11:
+                    if Entries[c] == Respostas[c]:
+                        Label(FrameExer,text='Correto!',bg='green').grid(row=11,column=c-8)
+                        total += 1
+                    else:
+                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='red').grid(row=11,column=c-8)
+                if total >= 1:
+                    Label(FrameRespet, text=f'Total de acertos: {total}. :D').grid(row=0,column=2)
+                if total == 0:
+                    Label(FrameRespet, text='Total de acertos: Nenhum. ;(').grid(row=0,column=2)
+        if opc == 'soma':
+            for c in range(nume):
+                Exercicios.soma()
+        if opc == 'multiplicacao':
+            for c in range(nume):
+                Exercicios.mult()
+        if opc == 'subtracao':
+            for c in range(nume):
+                Exercicios.sub()
+        if opc == 'divisao':
+            for c in range(nume):
+                Exercicios.div()
         for c in range(nume):
             Lab1 = Label(FrameExer,
                             text='ok', font='Arial 16',
@@ -88,31 +183,23 @@ class botoes():
                             width=8,
                             bd=2,                                          
                             relief=SOLID)
-            Respe = StringVar()
-            Resp = Text(FrameExer, width=10, height=1, font='arial 14')
-            
-            globals
-
             if c <= 2:
                 Lab1.grid(row = 0, column = c+1)
                 Lab1.config(text=Equacoes[c])
-                Resp.grid(row = 1, column = c+1)
             elif 2 < c <= 5:
-                Lab1.grid(row = 2, column = c-2)
+                Lab1.grid(row = 3, column = c-2)
                 Lab1.config(text=Equacoes[c])
-                Resp.grid(row = 3, column = c-2)
             elif 5 < c <= 8:
-                Lab1.grid(row = 4, column = c - 5)
+                Lab1.grid(row = 6, column = c - 5)
                 Lab1.config(text=Equacoes[c])
-                Resp.grid(row = 5, column = c - 5)
             elif 8 < c <= 11:
-                Lab1.grid(row = 6, column = c - 8)
+                Lab1.grid(row = 9, column = c - 8)
                 Lab1.config(text=Equacoes[c])
-                Resp.grid(row = 7, column = c - 8)
+            gridentry()
             Lab1.grid_configure(padx=4, pady=3)
-            Resp.grid_configure(padx=4, pady=3)
-            BRes = Button(FrameRespet,text='Responder', command=responder).grid(row=0,column=0)
-            BReset = Button(FrameRespet, text='Reset').grid(row=0, column=1)
+
+            Button(FrameRespet,text='Responder', command=responder).grid(row=0,column=0)
+            Button(FrameRespet, text='Reset',command=resetbutton).grid(row=0, column=1)
 
         def reset():
             pass        
