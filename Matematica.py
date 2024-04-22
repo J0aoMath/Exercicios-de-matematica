@@ -31,14 +31,33 @@ SPb_v = IntVar()
 SPb_v.set(value=1)
 FrameExer = ExeFrame(root)
 FrameRespet = Frame(root)
-
-#Comandos
 Equacoes = []
 Respostas = []
-
-
+tempo = '00:00'
+contar = False
+contador = 0
+Cronos = Label(FrameExec, text=tempo,bg='#ffffcc', font='14', relief=SUNKEN)
 #Funcoes
-
+def cronometro():
+    global tempo
+    global contar
+    global contador
+    if contar:
+        temporaria = tempo
+        m,s = map(int,temporaria.split(':'))
+        m = int(m)
+        s = int(contador)
+        if (s > 59):
+            s = 0
+            m+=1
+        s = str(0)+str(s)
+        m = str(0)+str(m)
+        temporaria = str(m[-2:])+':'+str(s[-2:])
+        tempo = temporaria
+        Cronos.after(1000,cronometro)
+        contador += 1
+        Cronos['text']=temporaria
+        tempo = temporaria
 
 class Exercicios():
             
@@ -67,14 +86,22 @@ class Exercicios():
         while True:
             a = randint(1,99)
             b = randint(1,9)
+            c = randint(1,5)
             res = a/b
             if res in range(1,99):
-                break
+                if c and b == 1:
+                    break
+                if b != 1:
+                    break
         Equacoes.append([a,'/',b])
         Respostas.append(int(res))
 
 class botoes():
+
     def linkbotao():
+        global contar
+        contar = True
+        cronometro()
         #Entries
         ent1 = IntVar()
         entr1 = Entry(FrameExer, textvariable=ent1)
@@ -121,6 +148,14 @@ class botoes():
         
 
         def resetbutton():
+            global contador
+            global tempo
+            global contador
+            global contar
+            contar = False
+            Cronos['bg'] = '#ffffcc'
+            contador = 0
+            tempo = '00:00'
             for widget in FrameExer.winfo_children():
                 widget.destroy()
             for widget in FrameRespet.winfo_children():
@@ -131,6 +166,9 @@ class botoes():
             BExe['state'] = 'normal'
 
         def responder():
+            global contar
+            contar=False
+            Cronos['bg'] = '#66ff66'
             Entries = [ent1.get(),ent2.get(),ent3.get(),ent4.get(),ent5.get(),ent6.get(),
                        ent7.get(),ent8.get(),ent9.get(),ent10.get(),ent11.get(),ent12.get()]
             
@@ -138,32 +176,34 @@ class botoes():
             for c in range(nume):
                 if c <= 2:
                     if Entries[c] == Respostas[c]:
-                        Label(FrameExer,text='Correto!',bg='green').grid(row=2,column=c+1)
+                        Label(FrameExer,text='Correto!',bg='#66ff66').grid(row=2,column=c+1)
                         total += 1
                     else:
-                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='red').grid(row=2,column=c+1)
+                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='#ff1a1a').grid(row=2,column=c+1)
                 elif c <= 5:
                     if Entries[c] == Respostas[c]:
-                        Label(FrameExer,text='Correto!',bg='green').grid(row=5,column=c-2)
+                        Label(FrameExer,text='Correto!',bg='#66ff66').grid(row=5,column=c-2)
                         total += 1
                     else:
-                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='red').grid(row=5,column=c-2)
+                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='#ff1a1a').grid(row=5,column=c-2)
                 elif c <= 8:
                     if Entries[c] == Respostas[c]:
-                        Label(FrameExer,text='Correto!',bg='green').grid(row=8,column=c-5)
+                        Label(FrameExer,text='Correto!',bg='#66ff66').grid(row=8,column=c-5)
                         total += 1
                     else:
-                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='red').grid(row=8,column=c-5)
+                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='#ff1a1a').grid(row=8,column=c-5)
                 elif c <= 11:
                     if Entries[c] == Respostas[c]:
-                        Label(FrameExer,text='Correto!',bg='green').grid(row=11,column=c-8)
+                        Label(FrameExer,text='Correto!',bg='#66ff66').grid(row=11,column=c-8)
                         total += 1
                     else:
-                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='red').grid(row=11,column=c-8)
-                if total >= 1:
-                    Label(FrameRespet, text=f'Total de acertos: {total}. :D').grid(row=0,column=2)
-                if total == 0:
-                    Label(FrameRespet, text='Total de acertos: Nenhum. ;(').grid(row=0,column=2)
+                        Label(FrameExer,text=f'Errado! O certo: {Respostas[c]}.',bg='#ff1a1a').grid(row=11,column=c-8)
+            if total >= 1 and total < 12:
+                Label(FrameRespet, text=f'Total de acertos: {total}.',font='11').grid(row=0,column=2)
+            if total == 12:
+                Label(FrameRespet, text='Parabéns! Você acertou todas! :D',font='11').grid(row=0,column=2)
+            if total == 0:
+                Label(FrameRespet, text='Total de acertos: Nenhum. ;(',font='11').grid(row=0,column=2,padx=4)
         if opc == 'soma':
             for c in range(nume):
                 Exercicios.soma()
@@ -198,11 +238,10 @@ class botoes():
             gridentry()
             Lab1.grid_configure(padx=4, pady=3)
 
-            Button(FrameRespet,text='Responder', command=responder).grid(row=0,column=0)
-            Button(FrameRespet, text='Reset',command=resetbutton).grid(row=0, column=1)
-
-        def reset():
-            pass        
+            Button(FrameRespet,text='Responder', command=responder).grid(row=0,column=0,padx=1,pady=3)
+            Button(FrameRespet, text='Reset',command=resetbutton).grid(row=0, column=1,padx=1,pady=5)
+        Cronos.grid(row=1,column=0, ipadx=8, padx=16)
+     
 #Layout e funcionalidades
 
 RBsom = Radiobutton(FrameOpc, text='Soma',font= '14',variable= variavel, value='soma')
@@ -216,20 +255,15 @@ RBdiv.grid(row= 0,column= 3)
 RBsom.select()
 
 BExe = Button(FrameExec, text='Executar', relief=RAISED, command=botoes.linkbotao)
-BExe.grid(row=1,column=0)
+BExe.grid(row=1,column=1,padx=2)
 
-SPb = Spinbox(FrameExec, from_=1, to=12, textvariable=SPb_v)
-SPb.grid(row=1, column=1)
+SPb = Spinbox(FrameExec, from_=1, to=12, textvariable=SPb_v, state='readonly')
+SPb.grid(row=1, column=2)
 
-
-
-#Grids
+#packs
 FrameOpc.pack()
 FrameExec.pack()
 FrameExer.pack()
 FrameRespet.pack()
-
-
-
 
 root.mainloop()
