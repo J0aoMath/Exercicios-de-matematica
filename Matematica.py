@@ -33,6 +33,7 @@ FrameExer = ExeFrame(root)
 FrameRespet = Frame(root)
 Equacoes = []
 Respostas = []
+limitador = 59
 tempo = '00:00'
 contar = False
 contador = 0
@@ -43,13 +44,13 @@ def cronometro():
     global contar
     global contador
     if contar:
-        temporaria = tempo
+        temporaria = str(tempo)
         m,s = map(int,temporaria.split(':'))
         m = int(m)
         s = int(contador)
-        if (s > 59):
-            s = 0
-            m+=1
+        if (s >= limitador):
+            contador = 0
+            m += 1
         s = str(0)+str(s)
         m = str(0)+str(m)
         temporaria = str(m[-2:])+':'+str(s[-2:])
@@ -86,12 +87,15 @@ class Exercicios():
         while True:
             a = randint(1,99)
             b = randint(1,9)
-            c = randint(1,5)
+            c = randint(1,3)
+            d = randint(1,3)
             res = a/b
             if res in range(1,99):
-                if c and b == 1:
+                if d == 2 and b == 2:
                     break
-                if b != 1:
+                if c == 1 and b == 1 and d == 1:
+                    break
+                if b != 1 and b != 2:
                     break
         Equacoes.append([a,'/',b])
         Respostas.append(int(res))
