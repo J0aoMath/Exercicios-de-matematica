@@ -243,7 +243,7 @@ class botoes():
             Lab1.grid_configure(padx=4, pady=3)
 
             Button(FrameRespet,text='Responder', command=responder).grid(row=0,column=0,padx=1,pady=3)
-            Button(FrameRespet, text='Reset',command=resetbutton).grid(row=0, column=1,padx=1,pady=5)
+            Button(FrameRespet, text='Reiniciar',command=resetbutton).grid(row=0, column=1,padx=1,pady=5)
         Cronos.grid(row=1,column=0, ipadx=8, padx=16)
      
 #Layout e funcionalidades

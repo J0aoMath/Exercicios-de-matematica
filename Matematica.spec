@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['matematica.py'],
+    ['Matematica.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -21,7 +21,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='matematica',
+    name='Matematica',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

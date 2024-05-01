@@ -1,5 +1,5 @@
 ('C:\\Users\\Joao Vitor\\Desktop\\Programação\\PROJETOS\\Originais\\App '
- 'Simples Matemática\\build\\matematica\\PYZ-00.pyz',
+ 'Simples Matemática\\build\\Matematica\\PYZ-00.pyz',
  [('_compat_pickle',
    'C:\\Users\\Joao '
    'Vitor\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\_compat_pickle.py',
