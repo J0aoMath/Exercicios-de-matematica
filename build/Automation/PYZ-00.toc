@@ -1,5 +1,5 @@
 ('C:\\Users\\Joao Vitor\\Desktop\\Programação\\PROJETOS\\Originais\\App '
- 'Simples Matemática\\build\\Automation\\PYZ-00.pyz',
+ 'Simples Matemática\\build\\automation\\PYZ-00.pyz',
  [('__future__',
    'C:\\Users\\Joao '
    'Vitor\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\__future__.py',

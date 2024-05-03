@@ -244,7 +244,6 @@ class botoes():
 
             Button(FrameRespet,text='Responder', command=responder).grid(row=0,column=0,padx=1,pady=3)
             Button(FrameRespet, text='Reiniciar',command=resetbutton).grid(row=0, column=1,padx=1,pady=5)
-        Cronos.grid(row=1,column=0, ipadx=8, padx=16)
      
 #Layout e funcionalidades
 
@@ -263,6 +262,7 @@ BExe.grid(row=1,column=1,padx=2)
 
 SPb = Spinbox(FrameExec, from_=1, to=12, textvariable=SPb_v, state='readonly')
 SPb.grid(row=1, column=2)
+Cronos.grid(row=1,column=0, ipadx=8, padx=16)
 
 #packs
 FrameOpc.pack()

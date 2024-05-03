@@ -6,8 +6,8 @@ from time import sleep
 528,66 - subtraçao
 446,66 - mult
 638,68 - div
-415,90 - exec
-622,88 - spinb
+623,86 - spinbox
+469,92 - executar
 384,180 - Entry
 450,472 - responder
 400,553 - reiniciar
@@ -15,7 +15,7 @@ from time import sleep
 menu = Tk()
 tela_height = menu.winfo_screenheight()
 tela_width = menu.winfo_screenwidth()
-menu_height = 200
+menu_height = 100
 menu_width = 200
 posy = tela_height / 2 - menu_height / 2
 posx = tela_width / 2 - menu_width / 2 + 300
@@ -31,9 +31,9 @@ def Execute():
     click()
     moveTo(x=638,y=68,duration=0.75)
     click()
-    moveTo(x=574,y=86,duration=0.75)
+    moveTo(x=623,y=86,duration=0.75)
     click(clicks=11,interval=0.25)
-    moveTo(x=415,y=90,duration=0.75)
+    moveTo(x=469,y=92,duration=0.75)
     click()
     moveTo(x=384,y=180,duration=0.75)
     doubleClick()
@@ -47,7 +47,7 @@ def Execute():
     click()
 
 frame_ex = Frame(menu)
-frame_ex.pack()
+frame_ex.pack(padx=0, pady=20)
 btn = Button(frame_ex,text='execute', relief=RAISED, command=Execute)
 btn.pack()
 menu.mainloop()
